@@ -1,0 +1,17 @@
+{
+  "short_name": "TEAM APP",
+  "name": "TEAM APP — Datová páteř klubu",
+  "description": "Komplexní systém pro správu sportovních klubů",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0f172a",
+  "background_color": "#f1f5f9",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
