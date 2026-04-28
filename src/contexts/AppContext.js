@@ -14,17 +14,9 @@ export function AppProvider({ children }) {
   const [categories, setCategories] = useState([])
   const [teams, setTeams] = useState([])
 
-  useEffect(() => {
-    if (user) loadClubs()
-  }, [user])
-
-  useEffect(() => {
-    if (club) loadSeasons(club.id)
-  }, [club])
-
-  useEffect(() => {
-    if (season) loadCategories(season.id)
-  }, [season])
+  useEffect(() => { if (user) loadClubs() }, [user])
+  useEffect(() => { if (club) loadSeasons(club.id) }, [club])
+  useEffect(() => { if (season) loadCategories(season.id) }, [season])
 
   async function loadClubs() {
     const { data } = await supabase.from('clubs').select('*').eq('is_active', true)
@@ -67,19 +59,20 @@ export function AppProvider({ children }) {
 
   async function createTeam(teamData) {
     const { data, error } = await supabase.from('teams').insert([{ ...teamData, club_id: club.id }]).select().single()
-    if (!error) { setTeams(prev => [...prev, data]); if (!team) setTeam(data) }
+    if (!error) {
+      setTeams(prev => [...prev, data])
+      if (!team) setTeam(data)
+      setCategories(prev => prev.map(c => c.id === teamData.category_id ? { ...c, teams: [...(c.teams || []), data] } : c))
+    }
     return { data, error }
   }
 
+  function reload() {
+    if (club) loadSeasons(club.id)
+  }
+
   return (
-    <AppContext.Provider value={{
-      club, setClub, clubs,
-      season, setSeason, seasons,
-      team, setTeam, teams,
-      categories,
-      createClub, createSeason, createCategory, createTeam,
-      reload: () => club && loadSeasons(club.id)
-    }}>
+    <AppContext.Provider value={{ club, setClub, clubs, season, setSeason, seasons, team, setTeam, teams, categories, createClub, createSeason, createCategory, createTeam, reload }}>
       {children}
     </AppContext.Provider>
   )
