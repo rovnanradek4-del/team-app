@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
 import { AppProvider } from './contexts/AppContext'
 import LoginPage from './pages/LoginPage'
-import SetupPage from './pages/SetupPage'
 import Dashboard from './pages/Dashboard'
 import PlayersPage from './pages/PlayersPage'
 import EventsPage from './pages/EventsPage'
@@ -23,9 +22,9 @@ function AppContent() {
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', background: '#0f172a' }}>
       <div style={{ textAlign: 'center', color: 'white' }}>
-        <div style={{ fontSize: 32, marginBottom: 12 }}>⚽</div>
+        <div style={{ fontSize: 32, marginBottom: 12 }}>â½</div>
         <div style={{ fontSize: 18, fontWeight: 600 }}>TEAM APP</div>
-        <div style={{ fontSize: 13, opacity: 0.5, marginTop: 8 }}>Načítám...</div>
+        <div style={{ fontSize: 13, opacity: 0.5, marginTop: 8 }}>NaÄÃ­tÃ¡m...</div>
       </div>
     </div>
   )
